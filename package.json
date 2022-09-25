@@ -1,0 +1,17 @@
+{
+  "name": "schedule",
+  "version": "0.1.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo No tests yet && exit 1",
+    "db": "echo No separate DB yet && exit 1",
+    "api": "echo No separate API yet && exit 1",
+    "backend": "cd backend && node index",
+    "build-admin-win": "cd frontend\\admin && node_modules\\.bin\\vite build",
+    "build-admin": "cd frontend/admin && node_modules/.bin/vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
