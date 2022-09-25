@@ -37,9 +37,25 @@ server.listen(port, () => {
 const calendar = require('./services/calendar.js')
 const generateSchedule = require('./services/generate-schedule')
 
-server.use('/', express.static('../frontend/www'))
-server.use('/admin', express.static('../frontend/admin/dist'))
-server.use('/assets', express.static('../frontend/admin/dist/assets'))
+
+
+function isAdmin( pRequest, pResponse, pNext )
+{
+  if ( pRequest?.baseUrl && ( pRequest.baseUrl == '/admin' ) )
+  {
+    if ( !pRequest.session.user?.loggedIn || !pRequest.session.user.roles.includes( 'admin' ) )
+      pResponse.redirect( '/login.html?redir=' + pRequest.originalUrl );
+    else
+      return pNext();
+  }
+  else
+    return pNext();
+}
+
+
+server.use( '/', express.static('../frontend/www' ) );
+server.use( '/admin', isAdmin, express.static('../frontend/admin/dist' ) );
+server.use( '/assets', express.static('../frontend/admin/dist/assets' ) );
 
 // Specialized REST API routes
 require('./routes/login.js')(server, db)

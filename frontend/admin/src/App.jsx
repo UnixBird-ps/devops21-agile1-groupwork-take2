@@ -16,8 +16,9 @@ import { Person as UserIcon, Group as GroupIcon, Lightbulb as CourseIcon, School
 const dataProvider = simpleRestProvider('/data');
 
 // Define React-Admin resources
+// dashboard={Dashboard}
 const App = () => (
-   <Admin dataProvider={dataProvider} dashboard={Dashboard} disableTelemetry>
+   <Admin dataProvider={dataProvider} disableTelemetry requireAuth>
       <Resource name="teachers" list={TeacherList} edit={TeacherEdit} create={TeacherCreate} icon={UserIcon} />
       <Resource name="classes" list={ClassList} edit={ClassEdit} create={ClassCreate} icon={GroupIcon} />
       <Resource name="courses" list={CourseList} edit={CourseEdit} create={CourseCreate} icon={CourseIcon} />
